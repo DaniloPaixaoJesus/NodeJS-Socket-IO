@@ -1,18 +1,19 @@
 <% include ../header %>
 <header>
-<h2>Ntalk - Editar contato</h2>
+	<h1>Node JS - Socket IO</h1>
 </header>
 <section>
+<div class="form-group" >
 <form action="/contato/<%- id %>" method="post">
-<input type="hidden" name="_method" value="put">
-<label>Nome:</label>
-<input type="text" name="contato[nome]"
-value="<%- contato.nome %>">
-<label>E-mail:</label>
-<input type="text" name="contato[email]"
-value="<%- contato.email %>">
-<button type="submit">Atualizar</button>
+	<input type="hidden" name="_method" value="put">
+	<label>Nome:</label>
+	<input type="text" name="contato[nome]" value="<%- contato.nome %>" class="form-control">
+	<label>E-mail:</label>
+	<input type="text" name="contato[email]" value="<%- contato.email %>" class="form-control">
+	<br/>
+	<button type="submit" class="btn btn-success" >Atualizar</button>
 </form>
+</div>
 </section>
 <% include ../exit %>
 <% include ../footer %>

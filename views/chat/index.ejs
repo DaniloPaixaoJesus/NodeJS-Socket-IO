@@ -26,14 +26,15 @@
 </script>
 
 <header>
-	<h2>Ntalk - Chat</h2>
+	<h1>Node JS - Chat</h1>
 </header>
 
 <section>
 	<pre id="chat"></pre>
 	<input type="hidden" id="nome" value="<%- usuario.nome %>">
-	<input type="text" id="msg" placeholder="Mensagem">
-	<button onclick="enviar();">Enviar</button>
+	<input type="text" id="msg" placeholder="Mensagem" class="form-control">
+	<br/>
+	<button onclick="enviar();" class="btn btn-success">Enviar</button>
 </section>
 
 <% include ../exit %>
