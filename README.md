@@ -8,3 +8,6 @@ Moment for format Dates
 
 Basic CRUD using MVC and routes
 Socket-IO for communicate in chat
+
+Access this app through url
+http://nodejssocketio-57935.onmodulus.net
