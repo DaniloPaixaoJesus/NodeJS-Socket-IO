@@ -1,7 +1,9 @@
 var express = require('express')
 , load = require('express-load')
 , app = express()
-, error = require('./middleware/error');
+, error = require('./middleware/error')
+, server = require('http').createServer(app)
+, io = require('socket.io').listen(server);
 
 
 //stack of configuration
@@ -47,7 +49,21 @@ load('models')
 .then('routes')
 .into(app);
 
+//socket.io setup
+io.sockets.on('connection', 
+			  function (client) {
+					client.on('send-server', function (data) {
+						var msg = "<b>"+data.nome+":</b> "+data.msg+"<br>";
+						client.emit('send-client', msg);
+						client.broadcast.emit('send-client', msg);
+					});
+			  });
+
 //start server
-app.listen(3000, function(){
+/*app.listen(3000, function(){
 	console.log("NodeJS-Socket-IO is running ...");
+});*/
+
+server.listen(3000, function(){
+	console.log("Ntalk no ar.");
 });
