@@ -3,17 +3,26 @@
 
 <script src="/socket.io/socket.io.js"></script>
 <script>
+
+	//socke that it will connect
 	var socket = io.connect('http://localhost:3000');
+
+	//listen to send-client emmit
+	//client.emit('send-client', msg);
 	socket.on('send-client', 
 				function (msg) {
+					//what will happen after recieve a message
 					document.getElementById('chat').innerHTML += msg;
 				}
 	);
+
+	//function that send message
 	var enviar = function() {
 		var nome = document.getElementById('nome').value;
 		var msg = document.getElementById('msg').value;
-		socket.emit('send-server', {nome: nome, msg: msg});
+		socket.emit('send-to-server', {nome: nome, msg: msg});
 	};
+
 </script>
 
 <header>

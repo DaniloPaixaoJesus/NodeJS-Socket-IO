@@ -49,15 +49,24 @@ load('models')
 .then('routes')
 .into(app);
 
-//socket.io setup
-io.sockets.on('connection', 
-			  function (client) {
-					client.on('send-server', function (data) {
+
+
+// We're connected to someone now. Let's listen for events from them
+var funcSocket = function (client) { 
+					//listen to someone who send some message
+					//socket.emit('send-to-server', {nome: nome, msg: msg});
+					client.on('send-to-server', function (data) { 
 						var msg = "<b>"+data.nome+":</b> "+data.msg+"<br>";
+
+						//now return to client (whom sent)
 						client.emit('send-client', msg);
 						client.broadcast.emit('send-client', msg);
 					});
-			  });
+			  };
+
+//socket.io setup
+// Now let's set up and start listening for events
+io.sockets.on('connection', funcSocket );
 
 //start server
 /*app.listen(3000, function(){
