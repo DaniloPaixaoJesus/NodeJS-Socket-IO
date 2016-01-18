@@ -64,6 +64,8 @@ io.sockets.on('connection',
 	console.log("NodeJS-Socket-IO is running ...");
 });*/
 
+var port = process.env.PORT || 3000;
+
 server.listen(3000, function(){
-	console.log("Ntalk no ar.");
+	console.log("NodeJS-Socket-IO is running ...");
 });
