@@ -55,6 +55,7 @@ app.use(function(error, req, res, next) {
 */
 
 //io authorization
+//see http://udgwebdev.com/nodejs-express-socketio-e-sessions/
 var authorizationCallBack = function(data, accept){
 	cookie(data, 
 		{}, 
