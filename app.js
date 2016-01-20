@@ -59,6 +59,7 @@ var authorizationCallBack = function(data, accept){
 	cookie(data, 
 		{}, 
 		function(err){
+			//compera sessionID of the server and cookies for authorizate
 			var sessionID = data.signedCookie[KEY];
 			store.get(sessionID, function(err, session){
 						if(err || !session){
