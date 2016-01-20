@@ -54,6 +54,26 @@ app.use(function(error, req, res, next) {
 });
 */
 
+//io authorization
+var authorizationCallBack = function(data, accept){
+	cookie(data, 
+		{}, 
+		function(err){
+			var sessionID = data.signedCookie[KEY];
+			store.get(sessionID, function(err, session){
+						if(err || !session){
+							accept(null, false);
+						}else{
+							data.session = session;
+							accept(null, true);
+						}
+					}
+				);
+		}
+	);
+};
+io.set('authorization', authorizationCallBack);
+	
 //Autoload modules into an Express application instance //require('express-load')
 //load mvc layers
 load('models')
