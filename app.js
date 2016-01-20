@@ -5,15 +5,26 @@ var express = require('express')
 , server = require('http').createServer(app)
 , io = require('socket.io').listen(server);
 
+//code for share session ID between socket.io and express
+const KEY = 'chat.socket.io.sid';
+const SECRET = 'chat';
+var cookie = express.cookieParser(SECRET)
+, store = new express.session.MemoryStore()
+, sessOpts = {secret: SECRET, key: KEY, store: store}
+, session = express.session(sessOpts);
 
 //stack of configuration
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
-//add middleware to  control session and cookies
-app.use(express.cookieParser('ntalk'));
-app.use(express.session());
+//add middleware to  control cookies
+//app.use(express.cookieParser('chat'));
+app.use(cookie);
 
+//add middleware to  control session
+//app.use(express.session());
+app.use(session);
+	
 //add middleware responsable for create objects JSON from form HTML
 app.use(express.json());
 app.use(express.urlencoded());
