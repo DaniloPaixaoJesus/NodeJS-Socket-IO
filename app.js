@@ -10,18 +10,18 @@ var express = require('express')
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
-//use control session and cookies
+//add middleware to  control session and cookies
 app.use(express.cookieParser('ntalk'));
 app.use(express.session());
 
-//responsable for create objects JSON from form HTML
+//add middleware responsable for create objects JSON from form HTML
 app.use(express.json());
 app.use(express.urlencoded());
 
-//Override method in http form
+//add middleware to override method in http form
 app.use(express.methodOverride());
 
-//manage application's routes allows implement all page erros
+//add middleware to manage application's routes allows implement all page erros
 app.use(app.router);
 
 //set static files to access http://localhost:3000/css/style.css
