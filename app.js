@@ -49,8 +49,11 @@ load('models')
 .then('routes')
 .into(app);
 
-
-
+//load socket middleware
+load('sockets')
+.into(io);
+/*
+Old socket call
 // We're connected to someone now. Let's listen for events from them
 var funcSocket = function (client) { 
 					//listen to someone who send some message
@@ -67,6 +70,7 @@ var funcSocket = function (client) {
 //socket.io setup
 // Now let's set up and start listening for events
 io.sockets.on('connection', funcSocket );
+*/
 
 //start server
 /*app.listen(3000, function(){
