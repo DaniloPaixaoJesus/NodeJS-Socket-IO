@@ -19,9 +19,10 @@
 
 	//function that send message
 	var enviar = function() {
-		var nome = document.getElementById('nome').value;
+		//var nome = document.getElementById('nome').value;
 		var msg = document.getElementById('msg').value;
-		socket.emit('send-to-server', {nome: nome, msg: msg});
+		//socket.emit('send-to-server', {nome: nome, msg: msg});
+		socket.emit('send-to-server', msg);
 	};
 
 </script>
@@ -32,7 +33,7 @@
 
 <section>
 	<pre id="chat"></pre>
-	<input type="hidden" id="nome" value="<%- usuario.nome %>">
+	<!-- <input type="hidden" id="nome" value="<%- usuario.nome %>"> -->
 	<input type="text" id="msg" placeholder="Mensagem" class="form-control">
 	<br/>
 	<button onclick="enviar();" class="btn btn-success">Enviar</button>
