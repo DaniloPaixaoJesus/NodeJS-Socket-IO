@@ -43,6 +43,7 @@ app.use(function(error, req, res, next) {
 });
 */
 
+//Autoload modules into an Express application instance //require('express-load')
 //load mvc layers
 load('models')
 .then('controllers')
