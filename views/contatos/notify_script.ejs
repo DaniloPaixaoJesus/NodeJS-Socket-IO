@@ -1,0 +1,13 @@
+<script src="/socket.io/socket.io.js"></script>
+<script src="/javascripts/util.js"></script>
+<script>
+
+	var socket = io.connect('http://localhost:3000'); //getUrl()
+	socket.on('new-message', 
+			function(data) {
+
+				var chat = document.getElementById('chat_' + data.email);
+				chat.href += '?' + data.sala;
+			}
+	);
+</script>

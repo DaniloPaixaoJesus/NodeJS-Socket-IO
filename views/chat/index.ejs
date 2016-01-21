@@ -6,7 +6,7 @@
 <script>
 
 	//socke that it will connect
-	var socket = io.connect(getUrl());
+	var socket = io.connect('http://localhost:3000'); //getUrl()
 
 	//listen to send-client emmit
 	//client.emit('send-client', msg);
@@ -33,7 +33,7 @@
 
 <section>
 	<pre id="chat"></pre>
-	<!-- <input type="hidden" id="nome" value="<%- usuario.nome %>"> -->
+	<!-- <input type="hidden" id="nome" value="< % - usuario.nome % >"> -->
 	<input type="text" id="msg" placeholder="Mensagem" class="form-control">
 	<br/>
 	<button onclick="enviar();" class="btn btn-success">Enviar</button>

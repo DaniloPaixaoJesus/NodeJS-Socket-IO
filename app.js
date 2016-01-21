@@ -6,8 +6,7 @@ var express = require('express')
 , io = require('socket.io').listen(server);
 
 //code for share session ID between socket.io and express
-const KEY = 'chat.socket.io.sid';
-const SECRET = 'chat';
+const KEY = 'ntalk.sid', SECRET = 'ntalk';
 var cookie = express.cookieParser(SECRET)
 , store = new express.session.MemoryStore()
 , sessOpts = {secret: SECRET, key: KEY, store: store}
@@ -18,7 +17,7 @@ app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
 //add middleware to  control cookies
-//app.use(express.cookieParser('chat'));
+//app.use(express.cookieParser('ntalk'));
 app.use(cookie);
 
 //add middleware to  control session
@@ -54,27 +53,26 @@ app.use(function(error, req, res, next) {
 });
 */
 
-//io authorization
-//see http://udgwebdev.com/nodejs-express-socketio-e-sessions/
-var authorizationCallBack = function(data, accept){
+//io authorization log in chat
+var AuthorizationCallBack = function(data, accept){
 	cookie(data, 
-		{}, 
-		function(err){
-			//compera sessionID of the server and cookies for authorizate
-			var sessionID = data.signedCookie[KEY];
-			store.get(sessionID, function(err, session){
-						if(err || !session){
-							accept(null, false);
-						}else{
-							data.session = session;
-							accept(null, true);
+		   {}, 
+		   function(err){
+				//compare sessionID of the server and cookies for authorizate
+				var sessionID = data.signedCookies[KEY];
+				store.get(sessionID, function(err, session){
+							if(err || !session){
+								accept(null, false);
+							}else{
+								data.session = session;
+								accept(null, true);
+							}
 						}
-					}
 				);
-		}
-	);
+			}
+		);
 };
-io.set('authorization', authorizationCallBack);
+io.set('authorization', AuthorizationCallBack);
 	
 //Autoload modules into an Express application instance //require('express-load')
 //load mvc layers

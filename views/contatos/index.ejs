@@ -29,12 +29,18 @@
 			<td><%- contato.email %></td>
 			<td>
 				<a href="/contato/<%- index %>" class="btn btn-success  btn-sm">Detalhes</a>
-				<a href="/chat/<%- contato.email %>" class="btn btn-success  btn-sm">Conversar</a>
+				<a id="chat_<%- contato.email %>" 
+					href="/chat/<%- contato.email %>" 
+					class="btn btn-success  btn-sm"
+				>
+					Conversar
+				</a>
 			</td>
 		</tr>
 		<% }) %>
 	</tbody>
 </table>
 </section>
+<% include notify_script %>
 <% include ../exit %>
 <% include ../footer %>
