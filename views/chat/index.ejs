@@ -1,43 +1,17 @@
-
 <% include ../header %>
-
-<script src="/socket.io/socket.io.js"></script>
-<script src="/javascripts/util.js"></script>
-<script>
-
-	//socke that it will connect
-	var socket = io.connect('http://localhost:3000'); //getUrl()
-
-	//listen to send-client emmit
-	//client.emit('send-client', msg);
-	socket.on('send-client', 
-				function (msg) {
-					//what will happen after recieve a message
-					document.getElementById('chat').innerHTML += msg;
-				}
-	);
-
-	//function that send message
-	var enviar = function() {
-		//var nome = document.getElementById('nome').value;
-		var msg = document.getElementById('msg').value;
-		//socket.emit('send-to-server', {nome: nome, msg: msg});
-		socket.emit('send-to-server', msg);
-	};
-
-</script>
-
-<header>
-	<h1>Node JS - Chat</h1>
+<% include chat_script %>
+<header class="row-fluid text-center">
+  <h2>Ntalk - Chat</h2>
 </header>
-
-<section>
-	<pre id="chat"></pre>
-	<!-- <input type="hidden" id="nome" value="< % - usuario.nome % >"> -->
-	<input type="text" id="msg" placeholder="Mensagem" class="form-control">
-	<br/>
-	<button onclick="enviar();" class="btn btn-success">Enviar</button>
+<section class="row-fluid">
+  <div class="well span6 offset3">
+    <pre id="chat" class="pre-scrollable" style="width:auto;height:250px;"></pre>
+    <div class="input-append">
+      <input type="text" id="mensagem" class="input-xlarge" placeholder="Digite sua mensagem">
+      <button class="btn btn-success" onclick="enviar();">Enviar</button>
+      <a href="/contatos" class="btn btn-inverse">Sair do chat</a>
+    </div>
+  </div>
 </section>
-
 <% include ../exit %>
 <% include ../footer %>

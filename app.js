@@ -54,7 +54,9 @@ app.use(function(error, req, res, next) {
 */
 
 //io authorization log in chat
-var AuthorizationCallBack = function(data, accept){
+
+io.set('authorization', 
+	function(data, accept){
 	cookie(data, 
 		   {}, 
 		   function(err){
@@ -71,8 +73,8 @@ var AuthorizationCallBack = function(data, accept){
 				);
 			}
 		);
-};
-io.set('authorization', AuthorizationCallBack);
+	}
+);
 	
 //Autoload modules into an Express application instance //require('express-load')
 //load mvc layers

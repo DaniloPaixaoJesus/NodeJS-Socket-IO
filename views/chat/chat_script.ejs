@@ -1,0 +1,18 @@
+<script src="/socket.io/socket.io.js"></script>
+<script src="/javascripts/util.js"></script>
+<script>
+  var socket = io.connect(getUrl());
+  
+  socket.emit('join', window.location.search);
+  
+  socket.on('send-client', function (msg) {
+    var chat = document.getElementById('chat');
+    chat.innerHTML += msg;
+  });
+  
+  var enviar = function() {
+    var msg = document.getElementById('mensagem');
+    socket.emit('send-server', msg.value);
+    msg.value = '';
+  };
+</script>

@@ -6,6 +6,7 @@ module.exports = function(app) {
 				
 			};*/
 			var param = {email:req.params.email};
+			//var param = {sala: req.query.sala}; //na versao 4
 			res.render('chat/index', param /*resultado*/);
 		}
 	};
