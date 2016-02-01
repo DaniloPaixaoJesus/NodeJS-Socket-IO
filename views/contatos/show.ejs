@@ -3,13 +3,13 @@
 <h2>Node JS - Socket IO - Dados do contato</h2>
 </header>
 <section>
-<form action="/contato/<%- id %>" method="post">
+<form action="/contato/<%- contato._id %>" method="post">
 <input type="hidden" name="_method" value="delete">
 <p><label>Nome:</label><%- contato.nome %></p>
 <p><label>E-mail:</label><%- contato.email %></p>
 <p>
 <button type="submit" class="btn btn-danger">Excluir</button>&nbsp
-<a href="/contato/<%- id %>/editar" class="btn btn-success">Editar</a>
+<a href="/contato/<%- contato._id %>/editar" class="btn btn-success">Editar</a>
 </p>
 </form>
 </section>
