@@ -3,7 +3,19 @@ var express = require('express')
 , app = express()
 , error = require('./middleware/error')
 , server = require('http').createServer(app)
-, io = require('socket.io').listen(server);
+, io = require('socket.io').listen(server)
+, mongoose = require('mongoose');
+
+global.db = mongoose.connect('mongodb://danilopaixao:88878685@ds057254.mongolab.com:57254/socket_io_chat');
+
+/**  MongoDB connection **/
+//var connstr = 'mongodb://danilopaixao:88878685@ds057254.mongolab.com:57254/socket_io_chat';
+//var connstr = 'mongodb://localhost/aulaCrud';
+
+/*mongoose.connect(connstr, function(err){
+	if(err) console.log('Error connect database: '+ err);
+	console.log('DataBase connected');
+});*/
 
 //code for share session ID between socket.io and express
 const KEY = 'ntalk.sid', SECRET = 'ntalk';
