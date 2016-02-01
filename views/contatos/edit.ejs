@@ -4,7 +4,7 @@
 </header>
 <section>
 <div class="form-group" >
-<form action="/contato/<%- id %>" method="post">
+<form action="/contato/<%- contato._id %>" method="post">
 	<input type="hidden" name="_method" value="put">
 	<label>Nome:</label>
 	<input type="text" name="contato[nome]" value="<%- contato.nome %>" class="form-control">
