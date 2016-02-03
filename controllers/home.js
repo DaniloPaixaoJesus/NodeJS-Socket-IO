@@ -5,7 +5,9 @@ module.exports = function(app) {
 	var HomeController = {
 		
 		index: function(req, res) {
-			var resultado = {mensagem: req.flash('warning')};
+			var resultado = {
+								//mensagem: req.flash('warning')
+							};
       			res.render('home/index', resultado);
 		},
 		
@@ -14,7 +16,7 @@ module.exports = function(app) {
 		             .select('nome email')
 		             .exec(function(erro, usuario){
 		        if(erro){
-		          req.flash('warning','Preencha os campos.');
+		          //req.flash('warning','Preencha os campos.');
 		          res.redirect('/');
 		        
 		        } else if (usuario) {
@@ -24,7 +26,7 @@ module.exports = function(app) {
 		        } else {
 		          Usuario.create(req.body.usuario, function(erro, usuario) {
 		            if(erro){
-		              req.flash('warning','Preencha os campos.');
+		              //req.flash('warning','Preencha os campos.');
 		              res.redirect('/');
 		            }else{
 		              req.session.usuario = usuario;

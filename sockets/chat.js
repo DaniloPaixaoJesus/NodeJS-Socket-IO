@@ -3,6 +3,19 @@ module.exports = function(io) {
   var crypto = require('crypto')
     , sockets = io.sockets;
 
+  var redis = require('redis').createClient(15400, 'pub-redis-15400.us-east-1-2.3.ec2.garantiadata.com', {no_ready_check: true});
+  redis.auth('88878685', function (err) {
+      if (err){
+        console.log('Error connect database REDIS: '+ err);
+      }else{
+        console.log('REDIS connected');
+      }
+  });
+
+  redis.on('connect', function() {
+      console.log('Connected to Redis');
+  });
+
   sockets.on('connection', function (client) {
 
     var session = client.handshake.session
@@ -31,11 +44,26 @@ module.exports = function(io) {
       client.join(sala);
 
       var msg = "<b>"+usuario.nome+":</b> entrou.<br>";
+      
+      redis.lpush(sala, msg, 
+          function(erro, res) {
+            redis.lrange(sala, 0, -1, 
+                function(erro, msgs) {
+                  msgs.forEach(
+                    function(msg) {
+                      sockets.in(sala).emit('send-client', msg);
+                  });
+                });
+          });
+
     });
 
     client.on('send-server', function (msg) {
       var msg = "<b>"+ usuario.nome +":</b> "+ msg +"<br>";
       client.get('sala', function(erro, sala) {
+
+        redis.lpush(sala, msg);
+
         var data = {email: usuario.email, sala: sala};
         client.broadcast.emit('new-message', data);
         sockets.in(sala).emit('send-client', msg);
@@ -45,6 +73,9 @@ module.exports = function(io) {
     client.on('disconnect', function() {
       client.get('sala', function(erro, sala) {
         var msg = "<b>"+ usuario.nome +":</b> saiu.<br>";
+
+        redis.lpush(sala, msg);
+        
         client.broadcast.emit('notify-offline', usuario.email);
         sockets.in(sala).emit('send-client', msg);
         client.leave(sala);
