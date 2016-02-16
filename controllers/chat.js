@@ -7,6 +7,7 @@ module.exports = function(app) {
 			};*/
 			var param = {email:req.params.email};
 			//var param = {sala: req.query.sala}; //na versao 4
+			console.log('  ------>>> ChatController var param (nothing to do, for while) =  --------->>>'+param+'<<<-----');
 			res.render('chat/index', param /*resultado*/);
 		}
 	};

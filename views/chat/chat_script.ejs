@@ -3,6 +3,11 @@
 <script>
   var socket = io.connect(getUrl());
   
+  //pass the room by parameter, it can be 'white' whether it is the first
+  //whether the request chat, the parameter will be pass in the to  "talk"
+  alert('window.location.search=='+window.location.search);
+
+  //when someone gett in the chat room with others, the command "join" will be executed - socket/chat.js
   socket.emit('join', window.location.search);
   
   socket.on('send-client', function (msg) {

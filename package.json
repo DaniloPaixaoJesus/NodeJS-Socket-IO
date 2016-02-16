@@ -4,7 +4,8 @@
   "description": "Node Chat using Socket IO",
   "private": true,
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "test": "mocha test"
   },
   "dependencies": {
     "connect-flash": "0.1.0",
@@ -14,6 +15,11 @@
     "mongoose": "~4.2.9",
     "redis": "^2.4.2",
     "socket.io": "0.9.16"
+  },
+  "devDependencies": {
+    "mocha": "^2.4.5",
+    "should": "^8.2.2",
+    "supertest": "^1.2.0"
   },
   "engines": {
     "node": "4.2.2"

@@ -33,8 +33,14 @@ module.exports = function(io) {
     });
   
     client.on('join', function(sala) {
+
+      console.log('  ------>>> BEFORE --->>> join method called  ------>>>'+sala+'<<<-----');
+
+      //Whom enter in the chat will create the chat ROOM with your onw email
+      //and people'll send messages to email address's room
       if(sala){
         sala = sala.replace('?','');
+        console.log('  ------>>> if(sala){<<<-----');
       } else {
         var timestamp = new Date().toString();
         var md5 = crypto.createHash('md5');
@@ -42,6 +48,8 @@ module.exports = function(io) {
       }
       client.set('sala', sala);
       client.join(sala);
+
+      console.log('  ------>>> AFTER --->>> join method called  ------>>>'+sala+'<<<-----');
 
       var msg = "<b>"+usuario.nome+":</b> entrou.<br>";
       
@@ -65,7 +73,12 @@ module.exports = function(io) {
         redis.lpush(sala, msg);
 
         var data = {email: usuario.email, sala: sala};
+        
+        //Everybody that has your email in the contact's list
+        //will become "MESSAGE" icon
         client.broadcast.emit('new-message', data);
+        
+        //who send message send only to one room
         sockets.in(sala).emit('send-client', msg);
       });
     });

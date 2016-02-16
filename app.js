@@ -9,7 +9,8 @@ var express = require('express')
 /**  MongoDB connection **/
 var connstr = 'mongodb://danilopaixao:88878685@ds057254.mongolab.com:57254/apptanamaodb';
 
-global.db = mongoose.connect(connstr);
+//global access global variable. that is not a good practice
+//global.db = mongoose.connect(connstr);
 
 //var connstr = 'mongodb://localhost/aulaCrud';
 /*mongoose.connect(connstr, function(err){
@@ -129,3 +130,6 @@ var port = process.env.PORT || 3000;
 server.listen(port, function(){
 	console.log("NodeJS-Socket-IO is running ...");
 });
+
+//export app for test
+module.exports = app;
