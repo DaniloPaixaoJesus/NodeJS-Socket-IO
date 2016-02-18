@@ -16,6 +16,8 @@ provide a high-level abstraction for testing HTTP
 */
 var request = require('supertest')(app); 
 
+//example
+//https://github.com/visionmedia/superagent/blob/master/test/node/agency.js
 
 describe('No controller home', 
 	function() {
