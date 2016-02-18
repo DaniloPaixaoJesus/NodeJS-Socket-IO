@@ -1,6 +1,21 @@
-var app = require('../app')
-	, should = require('should')
-	, request = require('supertest')(app);
+
+/**
+import app to raise a server
+*/
+var app = require('../app');
+
+/**
+https://www.npmjs.com/package/should
+test framework agnostic BDD-style assertions
+*/
+var should = require('should');
+
+/**
+https://www.npmjs.com/package/supertest 
+provide a high-level abstraction for testing HTTP
+*/
+var request = require('supertest')(app); 
+
 
 describe('No controller home', 
 	function() {
