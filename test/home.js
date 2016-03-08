@@ -1,73 +1,44 @@
+var app = require('../app')
+  , should = require('should')
+  , request = require('supertest')(app);
 
-/**
-import app to raise a server
-*/
-var app = require('../app');
+describe('No controller home', function() {
 
-/**
-https://www.npmjs.com/package/should
-test framework agnostic BDD-style assertions
-*/
-var should = require('should');
+  this.timeout(5000);
 
-/**
-https://www.npmjs.com/package/supertest 
-provide a high-level abstraction for testing HTTP
-*/
-var request = require('supertest')(app); 
+  it('deve retornar status 200 ao fazer GET /', function(done){
+    request.get('/')
+           .end(function(err, res){
+      res.status.should.eql(200);
+      done();
+    });
+  });
 
-//example
-//https://github.com/visionmedia/superagent/blob/master/test/node/agency.js
+  it('deve ir para rota / ao fazer GET /sair', function(done){
+    request.get('/sair')
+           .end(function(err, res){
+      res.headers.location.should.eql('/');
+      done();
+    });
+  });
+  
+  it('deve ir para rota / ao fazer POST /entrar', function(done){
+    var loginVazio = {usuario: {nome: '', email: ''}};
+    request.post('/entrar')
+           .send(loginVazio)
+           .end(function(err, res){
+      res.headers.location.should.eql('/');
+      done();
+    });
+  });
 
-describe('No controller home', 
-	function() {
-		it('deve retornar status 200 ao fazer GET /', 
-				function(done){
-					request.get('/').end(
-								function(err, res){
-										res.status.should.eql(200);
-										done();
-								});
-				}
-		);
-
-		it('deve ir para rota / ao fazer GET /sair', 
-				function(done){
-					request.get('/sair').end(
-							function(err, res){
-								res.headers.location.should.eql('/');
-								done();
-							}
-					);
-				}
-		);
-
-		it('deve ir para rota /contatos ao fazer POST /entrar', 
-			function(done){
-				var login = {usuario: {nome: 'danilo', email: 'danilo@danilo.com'}};
-				request.post('/entrar')
-				.send(login)
-				.end(
-					function(err, res){
-						res.headers.location.should.eql('/contatos');
-						done();
-					}
-				);
-			}
-		);
-
-		/*it('deve ir para rota / ao fazer POST /entrar', 
-			function(done){
-				var login = {usuario: {nome: '', email: ''}};
-				request.post('/entrar')
-				.send(login)
-				.end(
-					function(err, res){
-						res.headers.location.should.eql('/');
-						done();
-					}
-				);
-			}
-		);*/
-
-}); // fim da função describe()
+  it('deve ir para rota /contatos ao fazer POST /entrar', function(done){
+    var login = {usuario: {nome: 'Teste', email: 'teste@teste'}};
+    request.post('/entrar')
+           .send(login)
+           .end(function(err, res){
+      res.headers.location.should.eql('/contatos');
+      done();
+    });
+  });
+});
