@@ -34,6 +34,18 @@ module.exports = function(app) {
       });
     },
 
+    list: function(req, res) {
+      var _id = req.session.usuario._id;
+      Usuario.findById(_id, function(err, data) {
+        
+        if(err){
+          res.send(err);
+        }else{
+          res.json(data);
+        }
+      });
+    },
+
     edit: function(req, res) {
       var _id = req.session.usuario._id;
       Usuario.findById(_id, function(erro, usuario) {
