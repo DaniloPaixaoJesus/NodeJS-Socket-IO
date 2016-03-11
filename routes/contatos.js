@@ -9,4 +9,6 @@ module.exports = function(app) {
 	app.get('/contato/:id/editar', autenticar, contatos.edit);
 	app.put('/contato/:id', autenticar, contatos.update);
 	app.del('/contato/:id', autenticar, contatos.destroy);
+
+	app.get('/contatos/api/list', autenticar, contatos.list);
 };
